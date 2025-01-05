@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oryx - حلويات المها</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #4CAF50;
+            --danger-color: #f44336;
+            --whatsapp-color: #25D366;
+            --snapchat-color: #FFFC00;
+            --shadow-sm: 0 2px 4px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            padding-bottom: 180px;
+            min-height: 100vh;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            margin-bottom: 2rem;
+        }
+
+        .logo-text {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #000;
+            margin: 0;
+            letter-spacing: 2px;
+        }
+
+        .logo-subtext {
+            font-size: 1.8rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        /* Products Container */
+        .products-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            padding: 1rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto 120px auto;
+        }
+
+        /* Product Card Styles */
+        .product-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            font-size: 1.2rem;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 180px;
+            background-color: #f8f8f8;
+            margin: 0 auto 1rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            color: #666;
+            object-fit: cover;
+        }
+
+        .product-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.75rem;
+            color: #333;
+        }
+
+        .product-time {
+            font-size: 1.1rem;
+            color: #777;
+            margin-bottom: 1rem;
+        }
+
+        /* Variant Styles */
+        .product-variant {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 1rem 0;
+            flex-wrap: wrap;
+        }
+
+        .variant-option {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background-color: #f8f8f8;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+
+        .variant-option:hover {
+            background-color: #eee;
+        }
+
+        .variant-option input[type="radio"] {
+            margin: 0;
+            cursor: pointer;
+        }
+
+        /* Counter Styles */
+        .counter {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .counter button {
+            width: 35px;
+            height: 35px;
+            border: none;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .counter button:hover {
+            transform: scale(1.1);
+            background-color: #45a049;
+        }
+
+        .counter span {
+            font-size: 1.3rem;
+            min-width: 40px;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        /* Footer Styles */
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 -2px 4px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+            z-index: 900;
+        }
+
+        .footer-btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            flex: 1;
+            transition: transform 0.2s;
+        }
+
+        .footer-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .order-btn {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        .clear-btn {
+            background-color: var(--danger-color);
+            color: white;
+        }
+
+        .total-container {
+            background-color: #f8f8f8;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            text-align: center;
+            flex: 1;
+            font-weight: bold;
+            font-size: 1.1rem;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .delivery-info {
+            text-align: center;
+            font-size: 1.1rem;
+            color: #666;
+            margin-top: 2rem;
+        }
+
+        /* Social Buttons */
+        .social-buttons {
+            position: fixed;
+            bottom: 120px;
+            right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        .social-btn {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            border: none;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-md);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .social-btn:hover {
+            transform: scale(1.15);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .whatsapp-btn {
+            background-color: var(--whatsapp-color);
+        }
+
+        .snapchat-btn {
+            background-color: var(--snapchat-color);
+            color: black;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding-bottom: 180px;
+            }
+
+            .products-container {
+                padding: 1rem;
+                gap: 1rem;
+            }
+
+            .social-buttons {
+                bottom: 140px;
+            }
+
+            .footer-btn {
+                padding: 0.8rem 1rem;
+                font-size: 1rem;
+            }
+
+            .total-container {
+                padding: 0.8rem 1rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1 class="logo-text">ORYX</h1>
+        <div class="logo-subtext">حلويات المهاء</div>
+    </header>
+
+    <main class="products-container" id="products">
+        <!-- Products will be generated here -->
+    </main>
+
+    <div class="social-buttons">
+        <button class="social-btn whatsapp-btn" aria-label="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+        </button>
+        <button class="social-btn snapchat-btn" aria-label="Snapchat">
+            <i class="fab fa-snapchat-ghost"></i>
+        </button>
+    </div>
+
+    <footer>
+        <button class="footer-btn order-btn" onclick="submitOrder()">تقديم الطلب</button>
+        <div class="total-container">
+            المجموع: <span id="total-amount">0</span> ر.س
+        </div>
+        <button class="footer-btn clear-btn" onclick="clearCart()">حذف السلة</button>
+    </footer>
+
+    <div class="delivery-info">
+        رسوم التوصيل ٤٠ ر.س أو يمكنك اختيار خدمة التوصيل الخاصة بك
+    </div>
+
+    <script>
+        const products = [
+            { name: 'بوكس نكهات الشاهي', price: 75, time: '٤ ساعات', imageUrl: 'https://i.ibb.co/QQhBBgx/df81d807-90ec-4f62-b1eb-3e04815c3eea.jpg' },
+            { name: 'سكر ترحيبي ١٠ حبات', price: 25, time: '٤ ساعات', imageUrl: 'https://i.ibb.co/M83SyhD/2b3c9370-1cc4-4c75-b048-322e27267b5d.jpg' },
+            { name: 'حلى قهوة فناجيل شعبية', price: 130, time: '٣ ساعات', imageUrl: 'https://i.ibb.co/5s1yT7Y/48916fd9-2aaa-4e77-a091-2996af16f0ac.jpg' },
+            { name: 'حلى اوريو', price: 95, time: '٣ ساعات', imageUrl: 'https://i.ibb.co/MnBfF6H/f6e2b2f9-04b9-48a4-b8ea-e57b21133480.jpg' },
+            { name: 'حلى حطب', price: 75, time: '٣ ساعات', imageUrl: 'https://i.ibb.co/XyL2yDs/51938a2a-5c0f-4c3c-9d92-62662f4f193f.jpg' },
+            { 
+                name: 'تمر محشي',
+                variants: [
+                    { name: 'كيلو', price: 120 },
+                    { name: 'نص كيلو', price: 75 }
+                ],
+                time: '٣ ساعات',
+                imageUrl: 'https://i.ibb.co/WDcjBSk/b72e2bbb-e872-4b06-9639-821f0ed6175d.jpg'
+            },
+            { name: 'مصابيب بالسمن', price: 120, time: '٣ ساعات', imageUrl: 'https://i.ibb.co/PCwqkC7/43426ed7-512c-4e7a-ab21-3f6aeab22695.jpg' },
+            { name: 'مصابيب بالكشنة', price: 110, time: '٣ ساعات', imageUrl: 'https://i.ibb.co/c6PF2n5/190db7b4-cc5a-42ff-a066-873006ae2241.jpg' },
+            { name: 'خبزة الملة وسط', price: 150, time: '٣ ساعات', imageUrl: 'https://i.ibb.co/zSGQ43L/29790810-37d5-4da7-8029-c0bba2d5f0b5.jpg' },
+            { 
+                name: 'فتة بالسمن',
+                variants: [
+                    { name: 'وسط', price: 70 },
+                    { name: 'كبير', price: 150 }
+                ],
+                time: '٣ ساعات',
+                imageUrl: 'https://i.ibb.co/C6M7kSH/8fc4bd2c-e2eb-4d94-bacb-f9bc162e6106.jpg'
+            }
+        ];
+
+        function createProductCards() {
+            const container = document.getElementById('products');
+            products.forEach((product, index) => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+
+                const productImage = product.imageUrl ? `<img src="${product.imageUrl}" alt="${product.name}" class="product-image">` : `<div class="product-image">صورة المنتج</div>`;
+
+                const productTime = `<div class="product-time">الوقت المستغرق: ${product.time}</div>`;
+
+                if (product.variants) {
+                    const variantOptions = product.variants.map((variant, variantIndex) => `
+                        <label class="variant-option">
+                            <input type="radio" 
+                                   name="variant-${index}" 
+                                   value="${variantIndex}"
+                                   ${variantIndex === 0 ? 'checked' : ''}
+                                   onchange="updatePrice(${index}, ${variantIndex})">
+                            ${variant.name} - ${variant.price} ر.س
+                        </label>
+                    `).join('');
+
+                    card.innerHTML = `
+                        ${productImage}
+                        <h3>${product.name}</h3>
+                        ${productTime}
+                        <div class="product-variant">
+                            ${variantOptions}
+                        </div>
+                        <div class="counter">
+                            <button onclick="decrementCounter(${index})">-</button>
+                            <span id="counter-${index}">0</span>
+                            <button onclick="incrementCounter(${index})">+</button>
+                        </div>
+                    `;
+                } else {
+                    card.innerHTML = `
+                        ${productImage}
+                        <h3>${product.name}</h3>
+                        ${productTime}
+                        <p>${product.price} ر.س</p>
+                        <div class="counter">
+                            <button onclick="decrementCounter(${index})">-</button>
+                            <span id="counter-${index}">0</span>
+                            <button onclick="incrementCounter(${index})">+</button>
+                        </div>
+                    `;
+                }
+
+                container.appendChild(card);
+            });
+        }
+
+        function getProductPrice(index) {
+            const product = products[index];
+            if (product.variants) {
+                const selectedVariant = document.querySelector(`input[name="variant-${index}"]:checked`).value;
+                return product.variants[selectedVariant].price;
+            }
+            return product.price;
+        }
+
+        function getProductVariantName(index) {
+            const product = products[index];
+            if (product.variants) {
+                const selectedVariant = document.querySelector(`input[name="variant-${index}"]:checked`).value;
+                return product.variants[selectedVariant].name;
+            }
+            return '';
+        }
+
+        function calculateTotal() {
+            let total = 0;
+            products.forEach((product, index) => {
+                const quantity = parseInt(document.getElementById(`counter-${index}`).textContent);
+                const price = getProductPrice(index);
+                total += quantity * price;
+            });
+            document.getElementById('total-amount').textContent = total;
+            return total;
+        }
+
+        function updatePrice(productIndex, variantIndex) {
+            calculateTotal();
+        }
+
+        function incrementCounter(index) {
+            const counter = document.getElementById(`counter-${index}`);
+            counter.textContent = parseInt(counter.textContent) + 1;
+            calculateTotal();
+        }
+
+        function decrementCounter(index) {
+            const counter = document.getElementById(`counter-${index}`);
+            const currentValue = parseInt(counter.textContent);
+            if (currentValue > 0) {
+                counter.textContent = currentValue - 1;
+                calculateTotal();
+            }
+        }
+
+        function clearCart() {
+            products.forEach((_, index) => {
+                document.getElementById(`counter-${index}`).textContent = '0';
+            });
+            calculateTotal();
+        }
+
+        function submitOrder() {
+            let orderText = "طلب جديد:\n\n";
+            let total = 0;
+            let hasItems = false;
+
+            products.forEach((product, index) => {
+                const quantity = parseInt(document.getElementById(`counter-${index}`).textContent);
+                if (quantity > 0) {
+                    hasItems = true;
+                    const price = getProductPrice(index);
+                    const itemTotal = quantity * price;
+                    total += itemTotal;
+                    const variantName = getProductVariantName(index);
+                    const productName = product.name + (variantName ? ` (${variantName})` : '');
+                    orderText += `${productName}: ${quantity} × ${price} ر.س = ${itemTotal} ر.س\n`;
+                }
+            });
+
+            if (!hasItems) {
+                alert('الرجاء إضافة منتج واحد على الأقل إلى السلة');
+                return;
+            }
+
+            orderText += `\nالمجموع الكلي: ${total} ر.س`;
+
+            const whatsappNumber = "966590749906";
+            const encodedText = encodeURIComponent(orderText);
+            const confirmOrder = confirm("هل أنت متأكد من تقديم الطلب؟");
+            if (confirmOrder) {
+                window.open(`https://wa.me/${whatsappNumber}?text=${encodedText}`, '_blank');
+            }
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            createProductCards();
+
+            // Setup social buttons
+            document.querySelector('.whatsapp-btn').addEventListener('click', () => {
+                window.open('https://wa.me/966590749906', '_blank');
+            });
+
+            document.querySelector('.snapchat-btn').addEventListener('click', () => {
+                window.open('https://snapchat.com/t/1iJV7GxO', '_blank');
+            });
+        });
+    </script>
+</body>
+</html>
